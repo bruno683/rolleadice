@@ -7,8 +7,8 @@ class Player {
 
 const diceImage = document.querySelector('.diceImage');
 
-const playerOne = new Player(score, currentScore);
-const playerTwo = new Player(score, currentScore);
+const playerOne = new Player();
+const playerTwo = new Player();
 playerOne.score = document.querySelector('#pOneScore');
 playerOne.currentScore = document.querySelector('#pTwoScore')
 
@@ -25,11 +25,12 @@ function getRandomDice(min, max) {
 };
 
 roll.addEventListener('click',  () => {
-  console.log("Hello world")
-  /*const value = () => {
+ 
+  const value = () => {
     return getRandomDice(1,6);
   }
-    console.log(value());
-  diceImage.innerHTML = "<p>poil au cul</p>";*/
+  let number = value()
+    console.log(number);
+  diceImage.innerHTML = `<img src="images/${number}_dot.png">`;
 });
   
