@@ -14,7 +14,7 @@ const playerNameTwo = document.querySelector('#playerTwo')
 const playerOne = new Player();
 const playerTwo = new Player();
 playerOne.score = document.querySelector('#pOneScore');
-playerOne.currentScore = document.querySelector('#pTwoScore')
+playerOne.currentScore = document.querySelector('#pTwoScore');
 
 
 const roll = document.querySelector('.roll')
@@ -50,12 +50,26 @@ initGame()
 
 
 roll.addEventListener('click',  () => {
- 
-  const value = () => {
+ if(playerOne.round === true){
+   const value = () => {
     return getRandomDice(1,6);
   }
   let number = value()
     console.log(number);
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+  let currentScore = playerOne.currentScore.innerHTML
+  return currentScore + number ;
+ }else{
+   playerOne.round = false;
+   playerTwo.round = true;
+   const value = () => {
+    return getRandomDice(1,6);
+  }
+  let number = value()
+    console.log(number);
+  diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+  let currentScore = playerOne.currentScore.innerHTML;
+  return currentScore += number;
+  }
 });
   
