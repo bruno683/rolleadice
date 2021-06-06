@@ -66,7 +66,7 @@ startButton.addEventListener('click',() => {
   initGame()
 });
 
-
+initGame();
 
 roll.addEventListener('click',  () => {
 
@@ -78,7 +78,7 @@ roll.addEventListener('click',  () => {
 
   if(number !== 1 && playerOne.round === true ){
 
-  let currentScore = playerOne.currentScore;
+  const currentScore = playerOne.currentScore;
   let result = 0;
   result = parseInt(currentScore.innerHTML) + number;
   currentScore.innerHTML = result;
@@ -87,12 +87,12 @@ roll.addEventListener('click',  () => {
    playerOne.round = false;
    playerTwo.round = true;
    playerOne.currentScore.innerHTML = '0';
-   
+   currentScore = playerTwo.currentScore;
  } 
  
  if(number !== 1 && playerTwo.round === true){
 
-  let currentScore = playerTwo.currentScore;
+  const currentScore = playerTwo.currentScore;
   let result = 0;
   result = parseInt(currentScore.innerHTML) + number;
   currentScore.innerHTML = result;
@@ -101,6 +101,7 @@ roll.addEventListener('click',  () => {
   playerOne.round = true;
   playerTwo.round = false;
   playerTwo.currentScore.innerHTML = '0';
+  currentScore = playerOne.currentScore;
   
   } 
    
