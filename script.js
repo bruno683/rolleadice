@@ -9,6 +9,7 @@ class Player {
 }
 
 const diceImage = document.querySelector('.diceImage');
+const startButton = document.querySelector('.btn');
 const playerNameOne = document.querySelector('#playerOne')
 const playerNameTwo = document.querySelector('#playerTwo')
 const playerOne = new Player();
@@ -45,8 +46,10 @@ function initGame () {
 
   //init the game
 }
+startButton.addEventListener('click',() => {
+  initGame()
+});
 
-initGame()
 
 
 roll.addEventListener('click',  () => {
