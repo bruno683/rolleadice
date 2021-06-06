@@ -1,3 +1,4 @@
+
 class Player {
   constructor(score, currentScore, name){
     this.score = score;
@@ -14,16 +15,27 @@ const playerNameTwo = document.querySelector('#playerTwo')
 const playerOne = new Player();
 const playerTwo = new Player();
 playerOne.score = document.querySelector('#pOneScore');
-playerOne.currentScore = document.querySelector('#pTwoScore');
+playerOne.currentScore = document.querySelector('#currentScoreOne');
+playerTwo.score = document.querySelector('#pTwoScore');
+playerTwo.currentScore = document.querySelector('#currentScoreTwo')
 
 
 const roll = document.querySelector('.roll')
+const playButton = document.querySelector('.btn');
+const hold = document.querySelector('.hold');
+
+
+playButton.addEventListener('click', () => {
+  initGame();
+})
 
 const getRandomDice = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1 )) + min;
 };
+
+
 
 function initGame () {
 
@@ -34,6 +46,10 @@ function initGame () {
   playerTwo.name = pTwoName;
   playerNameOne.innerHTML = `<p>${playerOne.name}</p>`;
   playerNameTwo.innerHTML = `<p>${playerTwo.name}</p>`;
+  playerOne.score.innerHTML =  '0';
+  playerOne.currentScore.innerHTML = '0';
+  playerTwo.score.innerHTML = '0';
+  playerTwo.currentScore.innerHTML = '0';
   playerOne.round = true;
   const value = () => {
     return getRandomDice(1,6);
@@ -50,26 +66,41 @@ initGame()
 
 
 roll.addEventListener('click',  () => {
- if(playerOne.round === true){
+
    const value = () => {
     return getRandomDice(1,6);
   }
-  let number = value()
-    console.log(number);
+  const number = value()
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-  let currentScore = playerOne.currentScore.innerHTML
-  return currentScore + number ;
+
+  if(number !== 1 && playerOne.round === true ){
+
+  let currentScore = playerOne.currentScore;
+  let result = 0;
+  result = parseInt(currentScore.innerHTML) + number;
+  currentScore.innerHTML = result;
+
  }else{
    playerOne.round = false;
    playerTwo.round = true;
-   const value = () => {
-    return getRandomDice(1,6);
-  }
-  let number = value()
-    console.log(number);
-  diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-  let currentScore = playerOne.currentScore.innerHTML;
-  return currentScore += number;
-  }
+   playerOne.currentScore.innerHTML = '0';
+   
+ } 
+ 
+ if(number !== 1 && playerTwo.round === true){
+
+  let currentScore = playerTwo.currentScore;
+  let result = 0;
+  result = parseInt(currentScore.innerHTML) + number;
+  currentScore.innerHTML = result;
+
+ }else{
+  playerOne.round = true;
+  playerTwo.round = false;
+  playerTwo.currentScore.innerHTML = '0';
+  
+  } 
+   
+ 
 });
   
