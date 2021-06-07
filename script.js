@@ -6,7 +6,8 @@ class Player {
     this.name = name;
     this.isWinner = false;
     this.round = false;
-  }
+    }
+   
 }
 
 const diceImage = document.querySelector('.diceImage');
@@ -55,56 +56,52 @@ function initGame () {
   const value = () => {
     return getRandomDice(1,6);
   }
-  let number = value();
+  const number = value();
     //console.log(number);
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
 
 
   //init the game
 }
+
+//========================================================================================================
 startButton.addEventListener('click',() => {
   initGame()
 });
 
 initGame();
-
+//========================================================================================================
 roll.addEventListener('click',  () => {
-
-   const value = () => {
+  const value = () => {
     return getRandomDice(1,6);
   }
-  const number = value()
+  const number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-
+  if(number === 1){
+    playerOne.round = false;
+  }
   if(number !== 1 && playerOne.round === true ){
 
-  const currentScore = playerOne.currentScore;
+  let currentScore = playerOne.currentScore;
   let result = 0;
   result = parseInt(currentScore.innerHTML) + number;
   currentScore.innerHTML = result;
-
- }else{
-   playerOne.round = false;
-   playerTwo.round = true;
-   playerOne.currentScore.innerHTML = '0';
-   currentScore = playerTwo.currentScore;
- } 
- 
- if(number !== 1 && playerTwo.round === true){
-
-  const currentScore = playerTwo.currentScore;
-  let result = 0;
-  result = parseInt(currentScore.innerHTML) + number;
-  currentScore.innerHTML = result;
-
- }else{
-  playerOne.round = true;
-  playerTwo.round = false;
-  playerTwo.currentScore.innerHTML = '0';
-  currentScore = playerOne.currentScore;
   
-  } 
-   
+ }else {
+  playerOne.currentScore.innerHTML = '0';
+ };
  
+ if(playerOne.round === false){
+ if(number !== 1){
+   let currentScore = playerTwo.currentScore;
+   let result = 0;
+   result = parseInt(currentScore.innerHTML) + number;
+   currentScore.innerHTML = result;
+ }else {
+   playerOne.round = true;
+   playerTwo.currentScore.innerHTML = '0';
+ }
+   
+ } 
 });
   
