@@ -31,11 +31,12 @@ const getRandomDice = (min, max) => {
 };
 
 function switchPlayer () {
-
-   //switch the player round
-   player === 1 ? player = 0: player = 1;
   //reset currentScore
   currentScore = 0;
+  //switch the player round
+  player === 1 ? player = 0: player = 1;
+  
+  
 
   //Setting the current score of the players to zero
   playerOneCurrentScore.textcontent = `0`;
@@ -43,20 +44,31 @@ function switchPlayer () {
 
 }
 
+const isTheWinner = ( player) => {
+  
+  playerWin.innerHTML = `<p><strong>${player}<strong> est le vainqueur !!!</p>`;
+  roll.removeEventListener('click', false);
+  hold.removeEventListener('click', false);
+  e.stopPropagation();
+
+};
+
 function initGame () {
   playerNameOne.textContent = prompt('Joueur un, quel est votre nom?');
   playerNameTwo.textContent = prompt('Joueur deux, quel est votre nom?');
-  //init currentScore to zero
-  
   
   playerWin.innerHTML = '';
 
-  //Setting the current score of the players to zero
+  //init the scores of the players
+  player ;
+  currentScore = 0;
+  newScore1 = 0;
+  newScore2 = 0;
+
   playerOneCurrentScore.textcontent = '0';
   playerTwoCurrentScore.textcontent = '0';
   playerOneScore.textContent = '0';
   playerTwoScore.textContent = '0';
-
   //Display dice at the start of the game
   const value= () => {
    return getRandomDice(1,6)
@@ -69,12 +81,16 @@ function initGame () {
 initGame();
 
 playButton.addEventListener('click', () => {
+  
   initGame();
+  //Setting the current score of the players to zero
+  
+  
 })
 
 
 //========================================================================================================
-roll.addEventListener('click',  () => {
+roll.addEventListener('click', function roller() {
 
   const value = () => {
     return getRandomDice(1,6);
@@ -88,7 +104,7 @@ roll.addEventListener('click',  () => {
     let pOne = playerOneCurrentScore;
     let pTwo = playerTwoCurrentScore
 
-    player === 1 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
+    player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
   
  }else {
   switchPlayer()
@@ -96,24 +112,31 @@ roll.addEventListener('click',  () => {
  
 });
 
-hold.addEventListener('click', (event) => {
+hold.addEventListener('click', function holder() {
   //keep the points earned
   //checks if the amount of points reaches 100
   //if not, switch to next player
   
-  if(player === 1){
+  if(player === 0){
     
     newScore1 += currentScore;
     playerOneScore.textContent = newScore1;
     playerOneCurrentScore.textContent = '0';
+    if(newScore1 >= 100){
+      let pOneName = playerNameOne.textContent;
+      isTheWinner(pOneName);
+    }
+    
     switchPlayer();
   }else{
     
     newScore2 += currentScore;
     playerTwoScore.textContent = newScore2;
     playerTwoCurrentScore.textContent = '0';
-    
-    switchPlayer()
-  }
-
-})
+    if(newScore2 >= 100){
+      let pTwoName = playerNameTwo.textContent;
+      isTheWinner(pTwoName);
+    }
+    switchPlayer();
+  };
+});
