@@ -1,35 +1,26 @@
 
-class Player {
-  constructor(score, currentScore, name){
-    this.score = score;
-    this.currentScore = currentScore;
-    this.name = name;
-    this.isWinner = false;
-    this.round = false;
-    }
-   
-}
+
+
+let player ;
+let currentScore ;
+
 
 const diceImage = document.querySelector('.diceImage');
-const startButton = document.querySelector('.btn');
+
 const playerNameOne = document.querySelector('#playerOne')
 const playerNameTwo = document.querySelector('#playerTwo')
-const playerOne = new Player();
-const playerTwo = new Player();
-playerOne.score = document.querySelector('#pOneScore');
-playerOne.currentScore = document.querySelector('#currentScoreOne');
-playerTwo.score = document.querySelector('#pTwoScore');
-playerTwo.currentScore = document.querySelector('#currentScoreTwo')
+const playerWin = document.querySelector('.winner');
 
 
+playerOneScore = document.querySelector('#pOneScore');
+playerOneCurrentScore = document.querySelector('#currentScoreOne');
+playerTwoScore = document.querySelector('#pTwoScore');
+playerTwoCurrentScore = document.querySelector('#currentScoreTwo')
+
+// buttons
 const roll = document.querySelector('.roll')
 const playButton = document.querySelector('.btn');
 const hold = document.querySelector('.hold');
-
-
-playButton.addEventListener('click', () => {
-  initGame();
-})
 
 const getRandomDice = (min, max) => {
   min = Math.ceil(min);
@@ -37,39 +28,51 @@ const getRandomDice = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1 )) + min;
 };
 
+function switchPlayer () {
+
+   //switch the player round
+   player === 0 ? player = 1: player = 0;
+
+  //init currentScore to zero
+  currentScore = 0
 
 
-function initGame () {
+  //Setting the current score of the players to zero
+  playerOneCurrentScore.textcontent = '0';
+  playerTwoCurrentScore.textcontent = '0';
 
-  const pOneName = prompt('Joueur un: Quelle est votre prénom?');
-  const pTwoName = prompt('joueur deux: Quel est votre prénom')
-  
-  playerOne.name = pOneName;
-  playerTwo.name = pTwoName;
-  playerNameOne.innerHTML = `<p>${playerOne.name}</p>`;
-  playerNameTwo.innerHTML = `<p>${playerTwo.name}</p>`;
-  playerOne.score.innerHTML =  '0';
-  playerOne.currentScore.innerHTML = '0';
-  playerTwo.score.innerHTML = '0';
-  playerTwo.currentScore.innerHTML = '0';
-  playerOne.round = true;
-  const value = () => {
-    return getRandomDice(1,6);
-  }
-  const number = value();
-    //console.log(number);
-  diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-
-
-  //init the game
 }
 
-//========================================================================================================
-startButton.addEventListener('click',() => {
-  initGame()
-});
+function initGame () {
+  playerNameOne.textContent = prompt('Joueur un, quel est votre nom?');
+  playerNameTwo.textContent = prompt('Joueur deux, quel est votre nom?');
+  //init currentScore to zero
+  
+  
+  playerWin.innerHTML = '';
+
+  //Setting the current score of the players to zero
+  playerOneCurrentScore.textcontent = '0';
+  playerTwoCurrentScore.textcontent = '0';
+  playerOneScore.textContent = '0';
+  playerTwoScore.textContent = '0';
+
+  //Display dice at the start of the game
+  const value= () => {
+   return getRandomDice(1,6)
+  }
+  const number = value();
+  diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+}
+
 
 initGame();
+
+playButton.addEventListener('click', () => {
+  initGame();
+})
+
+
 //========================================================================================================
 roll.addEventListener('click',  () => {
   const value = () => {
@@ -77,31 +80,31 @@ roll.addEventListener('click',  () => {
   }
   const number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-  if(number === 1){
-    playerOne.round = false;
-  }
-  if(number !== 1 && playerOne.round === true ){
+  
+  if(number !== 1){
+    currentScore += number;
+    let pOne = playerOneCurrentScore;
+    let pTwo = playerTwoCurrentScore
 
-  let currentScore = playerOne.currentScore;
-  let result = 0;
-  result = parseInt(currentScore.innerHTML) + number;
-  currentScore.innerHTML = result;
+    player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
   
  }else {
-  playerOne.currentScore.innerHTML = '0';
- };
+  switchPlayer()
+  };
  
- if(playerOne.round === false){
- if(number !== 1){
-   let currentScore = playerTwo.currentScore;
-   let result = 0;
-   result = parseInt(currentScore.innerHTML) + number;
-   currentScore.innerHTML = result;
- }else {
-   playerOne.round = true;
-   playerTwo.currentScore.innerHTML = '0';
- }
-   
- } 
 });
+
+hold.addEventListener('click', (event) => {
+  //keep the points earned
+  //checks if the amount of points reaches 100
+  //if not, switch to next player
+  if(player === 0){
+    playerOneScore.innerText += currentScore;
+    switchPlayer();
+  }else{
+    playerTwoScore.innerText += currentScore;
+    switchPlayer()
+  }
   
+
+})
