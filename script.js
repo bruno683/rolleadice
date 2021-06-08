@@ -2,7 +2,9 @@
 
 
 let player ;
-let currentScore ;
+let currentScore = 0;
+let newScore1 = 0;
+let newScore2 = 0;
 
 
 const diceImage = document.querySelector('.diceImage');
@@ -31,15 +33,13 @@ const getRandomDice = (min, max) => {
 function switchPlayer () {
 
    //switch the player round
-   player === 0 ? player = 1: player = 0;
-
-  //init currentScore to zero
-  currentScore = 0
-
+   player === 1 ? player = 0: player = 1;
+  //reset currentScore
+  currentScore = 0;
 
   //Setting the current score of the players to zero
-  playerOneCurrentScore.textcontent = '0';
-  playerTwoCurrentScore.textcontent = '0';
+  playerOneCurrentScore.textcontent = `0`;
+  playerTwoCurrentScore.textcontent = `0`;
 
 }
 
@@ -75,10 +75,12 @@ playButton.addEventListener('click', () => {
 
 //========================================================================================================
 roll.addEventListener('click',  () => {
+
   const value = () => {
     return getRandomDice(1,6);
   }
   const number = value();
+  
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
   
   if(number !== 1){
@@ -86,7 +88,7 @@ roll.addEventListener('click',  () => {
     let pOne = playerOneCurrentScore;
     let pTwo = playerTwoCurrentScore
 
-    player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
+    player === 1 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
   
  }else {
   switchPlayer()
@@ -98,13 +100,20 @@ hold.addEventListener('click', (event) => {
   //keep the points earned
   //checks if the amount of points reaches 100
   //if not, switch to next player
-  if(player === 0){
-    playerOneScore.innerText += currentScore;
+  
+  if(player === 1){
+    
+    newScore1 += currentScore;
+    playerOneScore.textContent = newScore1;
+    playerOneCurrentScore.textContent = '0';
     switchPlayer();
   }else{
-    playerTwoScore.innerText += currentScore;
+    
+    newScore2 += currentScore;
+    playerTwoScore.textContent = newScore2;
+    playerTwoCurrentScore.textContent = '0';
+    
     switchPlayer()
   }
-  
 
 })
