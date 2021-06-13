@@ -24,6 +24,8 @@ const roll = document.querySelector('.roll')
 const playButton = document.querySelector('.btn');
 const hold = document.querySelector('.hold');
 
+
+//======================Fonctions et méthodes du jeu========
 const getRandomDice = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -42,15 +44,24 @@ function switchPlayer () {
   playerOneCurrentScore.textcontent = `0`;
   playerTwoCurrentScore.textcontent = `0`;
 
-}
+};
 
-const isTheWinner = ( player) => {
+const value= () => {
+  return getRandomDice(1,6);
+};
+
+const isTheWinner = ( player, event) => {
   
   playerWin.innerHTML = `<p><strong>${player}<strong> est le vainqueur !!!</p>`;
-  roll.removeEventListener('click', false);
-  hold.removeEventListener('click', false);
-  e.stopPropagation();
-
+  roll.removeEventListener('click',
+        rollDice,
+        false
+    );
+  hold.removeEventListener('click',
+  holdScore,
+  false
+  );
+  event.preventDefault();
 };
 
 function initGame () {
@@ -70,14 +81,62 @@ function initGame () {
   playerOneScore.textContent = '0';
   playerTwoScore.textContent = '0';
   //Display dice at the start of the game
-  const value= () => {
-   return getRandomDice(1,6)
-  }
-  const number = value();
+  value();
+  let number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+  roll.addEventListener('click', rollDice =  () => {
+
+    value()
+    let number = value();
+    
+    diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+    
+    if(number !== 1){
+      currentScore += number;
+      let pOne = playerOneCurrentScore;
+      let pTwo = playerTwoCurrentScore
+  
+      player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
+    
+   }else {
+    
+    switchPlayer()
+    };
+   
+  });
+  
+  hold.addEventListener('click', holdScore = () => {
+    //keep the points earned
+    //checks if the amount of points reaches 100
+    //if not, switch to next player
+    
+    if(player === 0){
+      
+      newScore1 += currentScore;
+      playerOneScore.textContent = newScore1;
+      playerOneCurrentScore.textContent = '0';
+      if(newScore1 >= 20){
+        let pOneName = playerNameOne.textContent;
+        isTheWinner(pOneName);
+      }
+      
+      switchPlayer();
+    }else{
+      
+      newScore2 += currentScore;
+      playerTwoScore.textContent = newScore2;
+      playerTwoCurrentScore.textContent = '0';
+      if(newScore2 >= 20){
+        let pTwoName = playerNameTwo.textContent;
+        isTheWinner(pTwoName);
+        
+      }
+      switchPlayer();
+    };
+  });
 }
 
-
+// Déroulement du jeu
 initGame();
 
 playButton.addEventListener('click', () => {
@@ -90,53 +149,9 @@ playButton.addEventListener('click', () => {
 
 
 //========================================================================================================
-roll.addEventListener('click', function roller() {
 
-  const value = () => {
-    return getRandomDice(1,6);
-  }
-  const number = value();
-  
-  diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
-  
-  if(number !== 1){
-    currentScore += number;
-    let pOne = playerOneCurrentScore;
-    let pTwo = playerTwoCurrentScore
 
-    player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
-  
- }else {
-  switchPlayer()
-  };
- 
-});
 
-hold.addEventListener('click', function holder() {
-  //keep the points earned
-  //checks if the amount of points reaches 100
-  //if not, switch to next player
   
-  if(player === 0){
-    
-    newScore1 += currentScore;
-    playerOneScore.textContent = newScore1;
-    playerOneCurrentScore.textContent = '0';
-    if(newScore1 >= 100){
-      let pOneName = playerNameOne.textContent;
-      isTheWinner(pOneName);
-    }
-    
-    switchPlayer();
-  }else{
-    
-    newScore2 += currentScore;
-    playerTwoScore.textContent = newScore2;
-    playerTwoCurrentScore.textContent = '0';
-    if(newScore2 >= 100){
-      let pTwoName = playerNameTwo.textContent;
-      isTheWinner(pTwoName);
-    }
-    switchPlayer();
-  };
-});
+
+
