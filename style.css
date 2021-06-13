@@ -16,6 +16,20 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  background: #595959;
+}
+
+.score1,
+.score2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }/*# sourceMappingURL=style.css.map */

@@ -4,27 +4,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+   integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+   crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.google.com/specimen/Lato" type="text/html">
   <title>Roll-A-Dice</title>
 </head>
 <body>
   <div class="newGame">
-    <h1>NEW GAME</h1>
-    <button class="btn">Play</button>
+    <h1>"Roll a Dice"</h1>
+    <button type="button" class="btn btn-outline-light">Play</button>
     <div class="winner"></div>
   </div>
   <main class="container">
     <div class="playerrOneWrapper">
-      <div id="playerOne"></div>
-      <div class="playerOneScore">
-        <p>score :</p>
-        <p class="score" id="pOneScore">0</p>
+      <div class="fs-2 fw-bold text-white py-2" id="playerOne"></div>
+        <div class="score1 py-5">
+          <div class="playerOneScore">
+          <p class="fs-2 fw-bold text-light">score :</p>
+          <p class="score " id="pOneScore">0</p>
+        </div>
+        <div class="current">
+          <p class="fs-2 fw-bold text-light">Current score :</p>
+          <p id="currentScoreOne">0</p>
+        </div>
       </div>
-      <div class="current">
-        <p>Current score</p>
-        <p id="currentScoreOne">0</p>
-      </div>
+      
     </div>
     <div class="dice">
       <div class="diceImage"></div>
@@ -32,17 +38,22 @@
       <button class="hold">HOLD</button>
     </div>
     <div class="playerTwoWrapper">
-      <div id="playerTwo"></div>
-      <div class="playerTwoScore">
-        <p>score :</p>
-        <p class="score" id="pTwoScore">0</p>
+      <div class="fs-2 fw-bold text-white py-2" id="playerTwo"></div>
+      <div class="score2 py-5">
+        <div class="playerTwoScore">
+          <p class="fs-2 fw-bold text-light">score :</p>
+          <p class="score" id="pTwoScore">0</p>
+        </div>
+        <div class="current">
+          <p class="fs-2 fw-bold text-light">Current score</p>  
+          <p id="currentScoreTwo">0</p>
+        </div>
       </div>
-      <div class="current">
-        <p>Current score</p>  
-        <p id="currentScoreTwo">0</p>
-      </div>
+      
     </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </body>
 </html>
