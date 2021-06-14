@@ -35,6 +35,7 @@ const getRandomDice = (min, max) => {
 function switchPlayer () {
   //reset currentScore
   currentScore = 0;
+  
   //switch the player round
   player === 1 ? player = 0: player = 1;
   
@@ -53,6 +54,7 @@ const value= () => {
 const isTheWinner = ( player, event) => {
   
   playerWin.innerHTML = `<p><strong>${player}<strong> est le vainqueur !!!</p>`;
+  
   roll.removeEventListener('click',
         rollDice,
         false
@@ -61,8 +63,19 @@ const isTheWinner = ( player, event) => {
   holdScore,
   false
   );
-  event.preventDefault();
+  event.stopPropagation();
 };
+const isActive = () => {
+  if(player === 0){
+  playerNameOne.style.background = "none";
+  playerNameTwo.style.background = "#4B8223";
+  }else{
+    playerNameTwo.style.background = "none";
+    playerNameOne.style.background = "#4B8223";
+  }
+};
+
+
 
 function initGame () {
   playerNameOne.textContent = prompt('Joueur un, quel est votre nom?');
@@ -76,11 +89,20 @@ function initGame () {
   newScore1 = 0;
   newScore2 = 0;
 
+
   playerOneCurrentScore.textcontent = '0';
   playerTwoCurrentScore.textcontent = '0';
   playerOneScore.textContent = '0';
   playerTwoScore.textContent = '0';
   //Display dice at the start of the game
+  isActive();
+  if(player === 0){
+    playerNameOne.style.background = "none";
+    playerNameTwo.style.background = "#4B8223";
+  }else{
+    playerNameTwo.style.background = "none";
+    playerNameOne.style.background = "#4B8223";
+  }
   value();
   let number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
@@ -92,15 +114,26 @@ function initGame () {
     diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
     
     if(number !== 1){
+     
+      
       currentScore += number;
       let pOne = playerOneCurrentScore;
       let pTwo = playerTwoCurrentScore
+      if(player === 0){
+        pTwo.textContent = currentScore;
+        playerNameOne.style.background = "none";
+        playerNameTwo.style.background = "#4B8223";
+      }else{
+        pOne.textContent = currentScore;
+        playerNameTwo.style.background = "none";
+        playerNameOne.style.background = "#4B8223";
+      }
   
-      player === 0 ? pOne.textContent = currentScore : pTwo.textContent = currentScore;  
-    
+      //player === 0 ? pTwo.textContent = currentScore : pOne.textContent = currentScore;  
+     
    }else {
-    
-    switchPlayer()
+    isActive();
+    switchPlayer();
     };
    
   });
@@ -112,32 +145,34 @@ function initGame () {
     
     if(player === 0){
       
-      newScore1 += currentScore;
-      playerOneScore.textContent = newScore1;
-      playerOneCurrentScore.textContent = '0';
-      if(newScore1 >= 20){
-        let pOneName = playerNameOne.textContent;
-        isTheWinner(pOneName);
+      newScore2 += currentScore;
+      playerTwoScore.textContent = newScore2;
+      playerTwoCurrentScore.textContent = '0';
+      if(newScore2 >= 100){
+        let pTwoName = playerNameTwo.textContent;
+        isTheWinner(pTwoName);
       }
       
       switchPlayer();
     }else{
       
-      newScore2 += currentScore;
-      playerTwoScore.textContent = newScore2;
-      playerTwoCurrentScore.textContent = '0';
-      if(newScore2 >= 20){
-        let pTwoName = playerNameTwo.textContent;
-        isTheWinner(pTwoName);
+      newScore1 += currentScore;
+      playerOneScore.textContent = newScore1;
+      playerOneCurrentScore.textContent = '0';
+      if(newScore1 >= 100){
+        let pOneName = playerNameOne.textContent;
+        isTheWinner(pOneName);
         
       }
       switchPlayer();
     };
+    isActive();
   });
 }
 
 // Déroulement du jeu
 initGame();
+
 
 playButton.addEventListener('click', () => {
   
