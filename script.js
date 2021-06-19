@@ -115,8 +115,8 @@ function initGame () {
       
    }else {
     switchPlayer();
-    
     };
+    
   isActive()
   });
   
