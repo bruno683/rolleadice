@@ -11,6 +11,7 @@ html {
 body {
   font-family: 'lato', Times, serif, sans-serif;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +39,8 @@ body {
 }
 
 .container {
-  width: 100%;
+  width: 90%;
+  height:auto;
   margin: 0;
   padding: 0;
   display: flex;
@@ -47,24 +49,111 @@ body {
   align-items: center;
   .playerOneWrapper, .playerTwoWrapper{
     width: 90%;
-    //padding-top: 10%;
   }
 }
+.buttonRollHold {
+  width: 128px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  gap: 0.3rem;
+  text-align: center;
+}
+.roll,
+.hold,
+.player {
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(32, 32, 32);
+  background: rgba(75, 74, 74, 0.418);
+  
+  
+  
+}
+ 
 
 @media screen and (min-width: 600px) {
+  
   .container {
+    width: 90%;
+    height: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin:auto;
     padding: 0;
+    overflow-y: hidden;
+
+    .playerOneWrapper,
+    .playerTwoWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     .score1,
     .score2 {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
   }
+  .buttonRollHold {
+    width: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+.roll,
+.hold {
+      padding: 0;
+      border-radius: 1rem;
+    
+    }
 }
+
+@media screen and (min-width: 1000px){
+  .body{
+    background: rgb(27, 27, 27);
+  }
+  .container {
+    margin: 0;
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    .dice{
+      padding: 20%;
+      width: 200px;
+      
+    }
+    .score1,
+    .score2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    
+
+    }
+    .buttonRollHold {
+        width: 128px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+    .roll,
+    .hold {
+          padding: 0;
+        
+        }
+  }
