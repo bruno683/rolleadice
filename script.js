@@ -66,13 +66,17 @@ const isTheWinner = ( player, event) => {
 
 //=========change background player name when active====
 const isActive = () => {
+  let pOne = playerOneCurrentScore;
+  let pTwo = playerTwoCurrentScore;
   if(player === 0){
-  playerNameOne.style.background = "none";
-  playerNameTwo.style.background = "#4B8223";
-  }else{
-    playerNameTwo.style.background = "none";
-    playerNameOne.style.background = "#4B8223";
-  }
+    pTwo.textContent = currentScore;  
+    playerNameOne.style.background = "none";
+    playerNameTwo.style.background = "#4B8223";
+    }else{
+      pOne.textContent = currentScore;
+      playerNameTwo.style.background = "none";
+      playerNameOne.style.background = "#4B8223";
+    }
 };
 
 //===================initialisation of the game=========
@@ -82,56 +86,38 @@ function initGame () {
   playerNameTwo.textContent = prompt('Joueur deux, quel est votre nom?');
   
   playerWin.innerHTML = '';
-
+  
   //init the scores of the players
-  player ;
+  player = 1;
   currentScore = 0;
   newScore1 = 0;
   newScore2 = 0;
-
+  
   playerOneCurrentScore.textcontent = '0';
   playerTwoCurrentScore.textcontent = '0';
   playerOneScore.textContent = '0';
   playerTwoScore.textContent = '0';
   //Display dice at the start of the game
-  isActive();
   
   value();
   let number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
 
-
-
   roll.addEventListener('click', rollDice =  () => {
-
+    
     value()
     let number = value();
     
     diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
     
     if(number !== 1){
-     
-      
       currentScore += number;
-      let pOne = playerOneCurrentScore;
-      let pTwo = playerTwoCurrentScore
-      if(player === 0){
-        pTwo.textContent = currentScore;
-        playerNameOne.style.background = "none";
-        playerNameTwo.style.background = "#4B8223";
-      }else{
-        pOne.textContent = currentScore;
-        playerNameTwo.style.background = "none";
-        playerNameOne.style.background = "#4B8223";
-      }
-  
-      //player === 0 ? pTwo.textContent = currentScore : pOne.textContent = currentScore;  
-     
+      
    }else {
-    isActive();
     switchPlayer();
+    
     };
-   
+  isActive()
   });
   
   hold.addEventListener('click', holdScore = () => {
@@ -147,9 +133,10 @@ function initGame () {
       if(newScore2 >= 100){
         let pTwoName = playerNameTwo.textContent;
         isTheWinner(pTwoName);
+        
       }
-      
       switchPlayer();
+      
     }else{
       
       newScore1 += currentScore;
@@ -158,9 +145,9 @@ function initGame () {
       if(newScore1 >= 100){
         let pOneName = playerNameOne.textContent;
         isTheWinner(pOneName);
-        
+         
       }
-      switchPlayer();
+     switchPlayer();
     };
     isActive();
   });
