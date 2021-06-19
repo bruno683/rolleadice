@@ -12,40 +12,42 @@
   <title>Roll-A-Dice</title>
 </head>
 <body>
-  <div class="newGame">
-    <h1>"Roll a Dice"</h1>
+  <div class="newGame mt-4">
+    <!--<h1>"Roll a Dice"</h1>-->
     <button type="button" class="btn btn-outline-light">Play</button>
     <div class="winner fs-1 fw-bolder text-danger"></div>
   </div>
   <main class="container">
     <div class="playerOneWrapper">
       <div class="fs-2 fw-bold text-white p-2 " id="playerOne"></div>
-        <div class="score1 ">
-          <div class="playerOneScore">
+        <div class="score1 align-items-baseline ">
+          <div class="playerOneScore ">
             <p class="fs-2 fw-bold text-light">score:</p>
-            <p class="score " id="pOneScore">0</p>
+            <p class="score fs-1 fw-bolder text-light " id="pOneScore">0</p>
           </div>
-          <div class="current">
+          <div class="current ">
             <p class="fs-2 fw-bold text-light">Current score:</p>
-            <p id="currentScoreOne">0</p>
+            <p class="fs-1 fw-bolder text-warning" id="currentScoreOne">0</p>
           </div>
         </div>
     </div>
-    <div class="dice">
+    <div class="dice m-auto">
       <div class="diceImage"></div>
-      <button class="roll">ROLL</button>
-      <button class="hold">HOLD</button>
+      <div class="buttonRollHold w-100">
+        <button class="roll btn btn-primary me-2 mt-2 rounded-3 px-2">ROLL</button>
+        <button class="hold btn btn-primary ms-2 mt-2 rounded-3 px-2">HOLD</button>
+      </div>
     </div>
-    <div class="playerTwoWrapper">
-      <div class="fs-2 fw-bold text-white p-2" id="playerTwo"></div>
-      <div class="score2 ">
-        <div class="playerTwoScore">
-          <p class="fs-2 fw-bold text-light">score:</p>
-          <p class="score" id="pTwoScore">0</p>
+    <div class="playerTwoWrapper pt-3">
+      <div class="fs-2 fw-bold text-white  p-2" id="playerTwo"></div>
+      <div class="score2 align-items-baseline">
+        <div class="playerTwoScore w-20  ">
+          <p class="fs-2 fw-bold text-light ">score:</p>
+          <p class="score fs-1 fw-bolder text-light"  id="pTwoScore">0</p>
         </div>
-        <div class="current">
-          <p class="fs-2 fw-bold text-light">Current score:</p>  
-          <p id="currentScoreTwo">0</p>
+        <div class="current w-20 h-auto ">
+          <p class="fs-2 fw-bold text-light ">Current score:</p>  
+          <p class="fs-1 fw-bolder text-warning" id="currentScoreTwo">0</p>
         </div>
       </div>
     </div>

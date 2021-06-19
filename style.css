@@ -20,6 +20,14 @@ body {
   background: #595959;
 }
 
+.dice {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .score1,
 .score2 {
   display: flex;
@@ -44,7 +52,6 @@ body {
 }
 .container .playerOneWrapper, .container .playerTwoWrapper {
   width: 90%;
-  padding-top: 10%;
 }
 
 @media screen and (min-width: 600px) {
