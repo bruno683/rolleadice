@@ -82,9 +82,13 @@ const isActive = () => {
 //===================initialisation of the game=========
 
 function initGame () {
-  playerNameOne.textContent = prompt('Joueur un, quel est votre nom?');
-  playerNameTwo.textContent = prompt('Joueur deux, quel est votre nom?');
-  
+   
+  let nameOne = prompt('Joueur un, quel est votre nom?');
+  let nameTwo = prompt('Joueur deux, quel est votre nom?')
+  playerNameTwo.textContent = nameTwo;
+  playerNameOne.textContent = nameOne;
+  alert(nameOne);
+  alert(nameTwo);
   playerWin.innerHTML = '';
   
   //init the scores of the players
