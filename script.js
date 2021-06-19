@@ -6,7 +6,7 @@ let currentScore = 0;
 let newScore1 = 0;
 let newScore2 = 0;
 
-
+//===================variable declaration=====================
 const diceImage = document.querySelector('.diceImage');
 
 const playerNameOne = document.querySelector('#playerOne')
@@ -26,31 +26,29 @@ const hold = document.querySelector('.hold');
 
 
 //======================Fonctions et méthodes du jeu========
+
+
+//======================Generation random number============
 const getRandomDice = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1 )) + min;
 };
-
+//======================switch  players================
 function switchPlayer () {
   //reset currentScore
   currentScore = 0;
-  
   //switch the player round
   player === 1 ? player = 0: player = 1;
-  
-  
-
   //Setting the current score of the players to zero
   playerOneCurrentScore.textcontent = `0`;
   playerTwoCurrentScore.textcontent = `0`;
-
 };
-
+//=====================setting value as random number==
 const value= () => {
   return getRandomDice(1,6);
 };
-
+//=====================setting winning condition=======
 const isTheWinner = ( player, event) => {
   
   playerWin.innerHTML = `<p><strong>${player}<strong> est le vainqueur !!!</p>`;
@@ -65,6 +63,8 @@ const isTheWinner = ( player, event) => {
   );
   event.stopPropagation();
 };
+
+//=========change background player name when active====
 const isActive = () => {
   if(player === 0){
   playerNameOne.style.background = "none";
@@ -75,7 +75,7 @@ const isActive = () => {
   }
 };
 
-
+//===================initialisation of the game=========
 
 function initGame () {
   playerNameOne.textContent = prompt('Joueur un, quel est votre nom?');
@@ -89,23 +89,19 @@ function initGame () {
   newScore1 = 0;
   newScore2 = 0;
 
-
   playerOneCurrentScore.textcontent = '0';
   playerTwoCurrentScore.textcontent = '0';
   playerOneScore.textContent = '0';
   playerTwoScore.textContent = '0';
   //Display dice at the start of the game
   isActive();
-  if(player === 0){
-    playerNameOne.style.background = "none";
-    playerNameTwo.style.background = "#4B8223";
-  }else{
-    playerNameTwo.style.background = "none";
-    playerNameOne.style.background = "#4B8223";
-  }
+  
   value();
   let number = value();
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
+
+
+
   roll.addEventListener('click', rollDice =  () => {
 
     value()
