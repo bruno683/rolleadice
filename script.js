@@ -104,7 +104,8 @@ function initGame () {
   diceImage.innerHTML = `<img src="images/${number}_dots.png">`;
 
   roll.addEventListener('click', rollDice =  () => {
-    
+    let rollDice = new Audio('sounds/diceRoll.mp3');
+    rollDice.play()
     value()
     let number = value();
     
@@ -114,6 +115,10 @@ function initGame () {
       currentScore += number;
       
    }else {
+     let loose = new Audio('sounds/loose.wav');
+     loose.play();
+     
+
     switchPlayer();
     };
     
@@ -124,6 +129,8 @@ function initGame () {
     //keep the points earned
     //checks if the amount of points reaches 100
     //if not, switch to next player
+    let holdSound = new Audio('sounds/holdButton.wav');
+    holdSound.play();
     
     if(player === 0){
       
@@ -131,9 +138,13 @@ function initGame () {
       playerTwoScore.textContent = newScore2;
       playerTwoCurrentScore.textContent = '0';
       if(newScore2 >= 100){
+        let win = new Audio('sounds/win.wav');
+        let youWin = new Audio('sounds/you-win.wav')
+        youWin.play();
+        win.play();
+        
         let pTwoName = playerNameTwo.textContent;
         isTheWinner(pTwoName);
-        
       }
       switchPlayer();
       
@@ -143,6 +154,11 @@ function initGame () {
       playerOneScore.textContent = newScore1;
       playerOneCurrentScore.textContent = '0';
       if(newScore1 >= 100){
+        let win = new Audio('sounds/win.wav');
+        win.play();
+        let youWin = new Audio('sounds/you-win.wav')
+        youWin.play();
+
         let pOneName = playerNameOne.textContent;
         isTheWinner(pOneName);
          
@@ -155,14 +171,9 @@ function initGame () {
 
 // Déroulement du jeu
 initGame();
-
-
 playButton.addEventListener('click', () => {
-  
   initGame();
   //Setting the current score of the players to zero
-  
-  
 })
 
 
